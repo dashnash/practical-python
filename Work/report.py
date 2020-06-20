@@ -55,5 +55,8 @@ for holding in portfolio:
 print('Current Value:', curr_value)
 
 change = curr_value - acq_value
+change_str = '$'+ str(change)
+if change < 0.0:
+    change_str = '$(' + str(-1 * change) + ')'
 
-print('Gain/Loss:', change)
+print('Gain/Loss:', change_str)
