@@ -3,7 +3,7 @@
 # Exercise 3.3
 import csv
 
-def parse_csv(file_obj, select=None, types=None, has_headers=True, delimiter=',', silence_errors=True):
+def parse_csv(file_obj, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
     '''
     Parse a CSV file into a list of records
     '''

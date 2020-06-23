@@ -15,15 +15,13 @@ types_headers = {
     'price': float
 }
 
-def read_portfolio(filename):
+def read_portfolio(filename, **opts):
     select=['name', 'shares', 'price']
     with open(filename) as f:
         port_dict = parse_csv(f, select=select, 
-            types=[types_headers[type_name] for type_name in select])
+            types=[types_headers[type_name] for type_name in select], **opts)
         
-        portfolio = Portfolio([Stock(record['name'], record['shares'], record['price'])
-            for record in port_dict])
-
+        portfolio = Portfolio([Stock(**record) for record in port_dict])
     return portfolio
 
 def read_prices(filename):
