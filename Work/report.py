@@ -2,7 +2,6 @@
 #
 # Exercise 2.4
 import csv
-import sys
 from fileparse import parse_csv
 
 types_headers = {
@@ -37,6 +36,7 @@ def make_report(portfolio, prices):
 
 
 def print_report(report):
+    'Prints a report'
     report_headers = ('Name', 'Shares', 'Price', 'Change')
     print('%10s %10s %10s %10s' % report_headers)
     print(('-' * 10 + ' ') * len(report_headers))
@@ -44,9 +44,16 @@ def print_report(report):
         print(f'{name:>10s} {shares:10d} {f"${price}":>10s} {change:10.2f}')
 
 def portfolio_report(portfolio_filename, prices_filename):
+    'Generates and prints a report from the given filenames'
     portfolio = read_portfolio(portfolio_filename)
     prices = read_prices(prices_filename)
     report = make_report(portfolio, prices)
     print_report(report)
 
-portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+
+def main(args):
+    portfolio_report(args[1], args[2])
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
