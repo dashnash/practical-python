@@ -50,17 +50,20 @@ def print_report(report, formatter):
         rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}' ]
         formatter.row(rowdata)
 
-def portfolio_report(portfolio_filename, prices_filename):
+def portfolio_report(portfolio_filename, prices_filename, fmt = 'txt'):
     'Generates and prints a report from the given filenames'
     portfolio = read_portfolio(portfolio_filename)
     prices = read_prices(prices_filename)
     report = make_report(portfolio, prices) 
-    formatter = tableformat.TextTableFormatter()
+    formatter = tableformat.create_formatter(fmt)
     print_report(report,formatter)
 
 
 def main(args):
-    portfolio_report(args[1], args[2])
+    if len(args) == 4:
+        portfolio_report(args[1], args[2], fmt=args[3])
+    else:
+        portfolio_report(args[1], args[2])
 
 if __name__ == '__main__':
     import sys
