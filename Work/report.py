@@ -14,14 +14,17 @@ types_headers = {
 
 def read_portfolio(filename):
     select=['name', 'shares', 'price']
-    portfolio = parse_csv(filename, select=select, 
-        types=[types_headers[type_name] for type_name in select])
+    with open(filename) as f:
+        portfolio = parse_csv(f, select=select, 
+            types=[types_headers[type_name] for type_name in select])
 
     return portfolio
 
 def read_prices(filename):
     'reads set of stock prices from filename and returns a dictionary'
-    price_tuples = parse_csv(filename, types=[str, float], has_headers=False)
+    with open(filename) as f:
+        price_tuples = parse_csv(f, types=[str, float], has_headers=False)
+    
     prices = {tup[0] : tup[1] for tup in price_tuples}
 
     return prices
