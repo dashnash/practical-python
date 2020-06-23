@@ -4,6 +4,7 @@
 import csv
 from fileparse import parse_csv
 from stock import Stock
+import tableformat
 
 types_headers = {
     'name' : str,
@@ -42,20 +43,20 @@ def make_report(portfolio, prices):
     return report
 
 
-def print_report(report):
+def print_report(report, formatter):
     'Prints a report'
-    report_headers = ('Name', 'Shares', 'Price', 'Change')
-    print('%10s %10s %10s %10s' % report_headers)
-    print(('-' * 10 + ' ') * len(report_headers))
+    formatter.headings(['Name', 'Shares', 'Price', 'Change'])
     for name, shares, price, change in report:
-        print(f'{name:>10s} {shares:10d} {f"${price}":>10s} {change:10.2f}')
+        rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}' ]
+        formatter.row(rowdata)
 
 def portfolio_report(portfolio_filename, prices_filename):
     'Generates and prints a report from the given filenames'
     portfolio = read_portfolio(portfolio_filename)
     prices = read_prices(prices_filename)
-    report = make_report(portfolio, prices)
-    print_report(report)
+    report = make_report(portfolio, prices) 
+    formatter = tableformat.TextTableFormatter()
+    print_report(report,formatter)
 
 
 def main(args):
