@@ -3,6 +3,7 @@
 # Exercise 2.4
 import csv
 from fileparse import parse_csv
+from stock import Stock
 
 types_headers = {
     'name' : str,
@@ -15,8 +16,11 @@ types_headers = {
 def read_portfolio(filename):
     select=['name', 'shares', 'price']
     with open(filename) as f:
-        portfolio = parse_csv(f, select=select, 
+        port_dict = parse_csv(f, select=select, 
             types=[types_headers[type_name] for type_name in select])
+        
+        portfolio = [Stock(record['name'], record['shares'], record['price'])
+            for record in port_dict]
 
     return portfolio
 
@@ -33,7 +37,7 @@ def make_report(portfolio, prices):
     'Generates formatted report from portfolio and prices'
     report = []
     for holding in portfolio:
-        report.append((holding['name'], holding['shares'], holding['price'], prices[holding['name']] - holding['price']))
+        report.append((holding.name, holding.shares, holding.price, prices[holding.name] - holding.price))
     
     return report
 

@@ -7,7 +7,7 @@ from report import read_portfolio
 def portfolio_cost(filename):
     cost = 0
     portfolio = read_portfolio(filename)
-    cost = sum([record['shares'] * record['price'] for record in portfolio])
+    cost = sum([record.shares * record.price for record in portfolio])
     
     return cost
 
