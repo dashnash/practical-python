@@ -2,7 +2,7 @@
 #
 # Exercise 4.1
 
-from typedproperty import typedproperty, String, Float, Integer
+from .typedproperty import typedproperty, String, Float, Integer
 
 class Stock:
     'Class representing Stock unit'

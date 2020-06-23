@@ -2,8 +2,8 @@
 #
 # Exercise 1.27
 import csv
-from report import read_portfolio
-from portfolio import Portfolio
+from .report import read_portfolio
+from .portfolio import Portfolio
 
 def portfolio_cost(filename):
     cost = 0

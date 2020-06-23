@@ -1,8 +1,8 @@
 # ticker.py
 
-from follow import follow
-from tableformat import create_formatter, print_table
-from report import read_portfolio
+from .follow import follow
+from .tableformat import create_formatter, print_table
+from .report import read_portfolio
 import csv
 
 def parse_stock_data(lines):
