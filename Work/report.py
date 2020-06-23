@@ -42,7 +42,6 @@ def make_report(portfolio, prices):
     
     return report
 
-
 def print_report(report, formatter):
     'Prints a report'
     formatter.headings(['Name', 'Shares', 'Price', 'Change'])

@@ -25,6 +25,12 @@ def create_formatter(fmt):
     else:
         raise RuntimeError(f'Unknown format {fmt}')
 
+def print_table(data, select, formatter):
+    'Prints a table of the portfolio with the selected columns'
+    formatter.headings(select)
+    for entry in data:
+        formatter.row([str(getattr(entry, prop)) for prop in select])
+
 class TextTableFormatter(TableFormatter):
     'Emit a table in plain-text format'
     def headings(self, headers):
