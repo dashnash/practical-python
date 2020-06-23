@@ -13,6 +13,8 @@ class TableFormatter:
         '''
         raise NotImplementedError()
 
+class FormatError(Exception):
+    pass
 
 def create_formatter(fmt):
     'Returns a table formatter for the specified type'
@@ -23,7 +25,7 @@ def create_formatter(fmt):
     elif 'html' == fmt:
         return HtmlTableFormatter()
     else:
-        raise RuntimeError(f'Unknown format {fmt}')
+        raise FormatError(f'Unknown format {fmt}')
 
 def print_table(data, select, formatter):
     'Prints a table of the portfolio with the selected columns'

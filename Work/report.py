@@ -5,6 +5,7 @@ import csv
 from fileparse import parse_csv
 from stock import Stock
 import tableformat
+from portfolio import Portfolio
 
 types_headers = {
     'name' : str,
@@ -20,8 +21,8 @@ def read_portfolio(filename):
         port_dict = parse_csv(f, select=select, 
             types=[types_headers[type_name] for type_name in select])
         
-        portfolio = [Stock(record['name'], record['shares'], record['price'])
-            for record in port_dict]
+        portfolio = Portfolio([Stock(record['name'], record['shares'], record['price'])
+            for record in port_dict])
 
     return portfolio
 

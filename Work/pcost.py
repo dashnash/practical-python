@@ -3,12 +3,12 @@
 # Exercise 1.27
 import csv
 from report import read_portfolio
+from portfolio import Portfolio
 
 def portfolio_cost(filename):
     cost = 0
     portfolio = read_portfolio(filename)
-    cost = sum([record.shares * record.price for record in portfolio])
-    
+    cost = portfolio.total_cost
     return cost
 
 
